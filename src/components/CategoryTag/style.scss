@@ -1,0 +1,23 @@
+.category-tag {
+  display: inline-block;
+  border-radius: 6px;
+  padding: 4px 10px;
+
+  font-family: "Work Sans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  text-transform: capitalize;
+}
+
+.normal_tag {
+  background: rgba(75, 107, 251, 0.05);
+  color: #4b6bfb;
+}
+
+.invert_tag {
+  background: #4B6BFB;
+  color: #FFFFFF;
+}
+
