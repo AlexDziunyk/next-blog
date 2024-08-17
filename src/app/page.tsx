@@ -6,7 +6,7 @@ import BigBlog from "@/components/BigBlog/BigBlog";
 export default function Home() {
   return (
     <main className={styles.main}>
-      <BigBlog />
+      
     </main>
   );
 }

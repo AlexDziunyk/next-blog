@@ -2,13 +2,29 @@ import Image from "next/image";
 import "./style.scss";
 import CategoryTag, { categoryTagTypes } from "../CategoryTag/CategoryTag";
 
-const BigBlog = () => {
+interface IBigBlogProps {
+  image: string;
+  tags: string[];
+  title: string;
+  avatar: string;
+  username: string;
+  date: string;
+}
+
+const BigBlog = ({
+  image,
+  tags,
+  title,
+  avatar,
+  username,
+  date,
+}: IBigBlogProps) => {
   return (
     <div className="big-blog__wrapper">
       <div className="big-blog">
         <div className="image__wrapper">
           <Image
-            src={"/images/bigblog.png"}
+            src={image}
             alt="Picture of the blog"
             quality={100}
             fill
@@ -16,23 +32,23 @@ const BigBlog = () => {
           />
         </div>
         <div className="info">
-          <CategoryTag
-            text="technology"
-            categoryTagType={categoryTagTypes.INVERT}
-          />
-          <h2>
-            The Impact of Technology on the Workplace: How Technology is
-            Changing
-          </h2>
+          {tags &&
+            tags.map((item) => (
+              <CategoryTag
+                text={item}
+                categoryTagType={categoryTagTypes.INVERT}
+              />
+            ))}
+          <h2>{title}</h2>
           <div className="author">
             <Image
-              src="/images/avatar.png"
+              src={avatar}
               alt={"avatar"}
               width={32}
               height={32}
             />
-            <span className="username">Jason Francisco</span>
-            <span className="date">August 20, 2022</span>
+            <span className="username">{username}</span>
+            <span className="date">{date}</span>
           </div>
         </div>
       </div>
