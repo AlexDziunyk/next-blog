@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, useEffect, useRef } from "react";
 import "./style.scss";
 
 interface IInputProps {
@@ -14,11 +14,14 @@ const Input = ({
   onChange,
   inputClassName,
   inputWrapperClassName,
-  placeholder
+  placeholder,
 }: IInputProps) => {
+
+  
   return (
     <div className={`input__wrapper ${inputWrapperClassName}`}>
       <input
+        type="text"
         placeholder={placeholder}
         className={`${inputClassName}`}
         value={value}

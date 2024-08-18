@@ -55,10 +55,6 @@ const CustomBubbleMenu = ({ editor }: IBubbleMenuProps) => {
     handleTaskList,
   } = useMyEditor(editor);
 
-  const handleOpenColorList = () => {
-    setColorList(true);
-  };
-
   useEffect(() => {
     const handleClickLinkOutSide = (event: MouseEvent) => {
       if (
@@ -110,7 +106,7 @@ const CustomBubbleMenu = ({ editor }: IBubbleMenuProps) => {
       <BubbleMenu
         className="bubble-menu"
         editor={editor}
-        tippyOptions={{ duration: 100 }}
+        tippyOptions={{ duration: 100, zIndex: 3 }}
       >
         <BubbleIconItem
           active={editor.isActive("bold")}
@@ -153,127 +149,130 @@ const CustomBubbleMenu = ({ editor }: IBubbleMenuProps) => {
           onClick={() => setTextList(true)}
           Icon={MdOutlineTextFields}
         />
+        {linkList && !editor.isActive("link") && (
+          <BubbleSelectList>
+            <div ref={linkListRef} className="link__wrapper">
+              <Input
+                value={linkValue}
+                onChange={(e) => setLinkValue(e.target.value)}
+                placeholder="Write your link in here"
+              />
+              <button
+                disabled={linkValue.length === 0}
+                type="button"
+                onClick={() => {
+                  handleSaveLink(linkValue);
+                  setLinkList(false);
+                }}
+                className="link__button_save"
+              >
+                Save Link
+              </button>
+            </div>
+          </BubbleSelectList>
+        )}
+        {colorList && (
+          <BubbleSelectList>
+            <div ref={colorListRef} className="color__wrapper">
+              <span className="section__title">Color</span>
+              <div className="colors__col">
+                {colorsArr.map(({ color, colorName }: IColorObj, index) => (
+                  <ListLetterItem
+                    key={index}
+                    onClick={() => {
+                      handleColor(color, index);
+                      setColorList(false);
+                    }}
+                    color={color}
+                    colorName={colorName}
+                    active={editor.isActive("textStyle", { color })}
+                  />
+                ))}
+              </div>
+              <span className="section__title">Background</span>
+              <div className="colors__col">
+                {backgroundsArr.map(
+                  ({ color, colorName }: IColorObj, index) => (
+                    <ListLetterItem
+                      key={index}
+                      onClick={() => {
+                        handleHighlight(color, index);
+                        setColorList(false);
+                      }}
+                      background={color}
+                      colorName={colorName}
+                      active={editor.isActive("highlight", { color })}
+                    />
+                  )
+                )}
+              </div>
+            </div>
+          </BubbleSelectList>
+        )}
+        {textList && (
+          <BubbleSelectList>
+            <div ref={textListRef} className="text__wrapper">
+              <span className="section__title">Turn into</span>
+              <ListIconItem
+                onClick={() => {
+                  handleHeading(1);
+                  setTextList(false);
+                }}
+                Icon={TbH1}
+                name={"Heading 1"}
+              />
+              <ListIconItem
+                onClick={() => {
+                  handleHeading(2);
+                  setTextList(false);
+                }}
+                Icon={TbH2}
+                name={"Heading 2"}
+              />
+              <ListIconItem
+                onClick={() => {
+                  handleHeading(3);
+                  setTextList(false);
+                }}
+                Icon={TbH3}
+                name={"Heading 3"}
+              />
+              <ListIconItem
+                onClick={() => {
+                  handleBlockquote();
+                  setTextList(false);
+                }}
+                Icon={BsBlockquoteLeft}
+                name={"Quote"}
+              />
+              <ListIconItem
+                onClick={() => {
+                  handleBulletList();
+                  setTextList(false);
+                }}
+                Icon={MdFormatListBulleted}
+                name={"Bullet list"}
+              />
+              <ListIconItem
+                onClick={() => {
+                  handleOrderedList();
+                  setTextList(false);
+                }}
+                Icon={GoListOrdered}
+                name={"Ordered list"}
+              />
+              <ListIconItem
+                onClick={() => {
+                  handleTaskList();
+                  setTextList(false);
+                }}
+                Icon={GoTasklist}
+                name={"Task list"}
+              />
+            </div>
+          </BubbleSelectList>
+        )}
       </BubbleMenu>
-      {linkList && !editor.isActive("link") && (
-        <BubbleSelectList>
-          <div ref={linkListRef} className="link__wrapper">
-            <Input
-              value={linkValue}
-              onChange={(e) => setLinkValue(e.target.value)}
-              placeholder="Write your link in here"
-            />
-            <button
-              disabled={linkValue.length === 0}
-              onClick={() => {
-                handleSaveLink(linkValue);
-                setLinkList(false);
-              }}
-              className="link__button_save"
-            >
-              Save Link
-            </button>
-          </div>
-        </BubbleSelectList>
-      )}
-      {colorList && (
-        <BubbleSelectList>
-          <div ref={colorListRef} className="color__wrapper">
-            <span className="section__title">Color</span>
-            <div className="colors__col">
-              {colorsArr.map(({ color, colorName }: IColorObj, index) => (
-                <ListLetterItem
-                  key={index}
-                  onClick={() => {
-                    handleColor(color, index);
-                    setColorList(false);
-                  }}
-                  color={color}
-                  colorName={colorName}
-                  active={editor.isActive("textStyle", { color })}
-                />
-              ))}
-            </div>
-            <span className="section__title">Background</span>
-            <div className="colors__col">
-              {backgroundsArr.map(({ color, colorName }: IColorObj, index) => (
-                <ListLetterItem
-                  key={index}
-                  onClick={() => {
-                    handleHighlight(color, index);
-                    setColorList(false);
-                  }}
-                  background={color}
-                  colorName={colorName}
-                  active={editor.isActive("highlight", { color })}
-                />
-              ))}
-            </div>
-          </div>
-        </BubbleSelectList>
-      )}
-      {textList && (
-        <BubbleSelectList>
-          <div ref={textListRef} className="text__wrapper">
-            <span className="section__title">Turn into</span>
-            <ListIconItem
-              onClick={() => {
-                handleHeading(1);
-                setTextList(false);
-              }}
-              Icon={TbH1}
-              name={"Heading 1"}
-            />
-            <ListIconItem
-              onClick={() => {
-                handleHeading(2);
-                setTextList(false);
-              }}
-              Icon={TbH2}
-              name={"Heading 2"}
-            />
-            <ListIconItem
-              onClick={() => {
-                handleHeading(3);
-                setTextList(false);
-              }}
-              Icon={TbH3}
-              name={"Heading 3"}
-            />
-            <ListIconItem
-              onClick={() => {
-                handleBlockquote();
-                setTextList(false);
-              }}
-              Icon={BsBlockquoteLeft}
-              name={"Quote"}
-            />
-            <ListIconItem
-              onClick={() => {
-                handleBulletList();
-                setTextList(false);
-              }}
-              Icon={MdFormatListBulleted}
-              name={"Bullet list"}
-            />
-            <ListIconItem
-              onClick={() => {
-                handleOrderedList();
-                setTextList(false);
-              }}
-              Icon={GoListOrdered}
-              name={"Ordered list"}
-            />
-            <ListIconItem
-              onClick={() => {
-                handleTaskList();
-                setTextList(false);
-              }}
-              Icon={GoTasklist}
-              name={"Task list"}
-            />
-          </div>
-        </BubbleSelectList>
-      )}
     </div>
   );
 };

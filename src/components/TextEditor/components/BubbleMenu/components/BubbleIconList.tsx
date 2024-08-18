@@ -19,7 +19,7 @@ const BubbleIconList = ({
 }: IBubbleIconListProps) => {
   return (
     <div className="bubble-icon-list">
-      <button onClick={onClick} className={`bubble-icon-item ${active ? "active" : ""}`}>
+      <button type="button" onClick={onClick} className={`bubble-icon-item ${active ? "active" : ""}`}>
         <Icon size={size} />
         <IoIosArrowDown size={arrowSize} />
       </button>

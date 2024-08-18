@@ -10,7 +10,7 @@ interface IListLetterItemProps {
 
 const ListLetterItem = ({ color, colorName, active, onClick, background }: IListLetterItemProps) => {
   return (
-    <div onClick={onClick} className="text-color-item">
+    <button type="button" onClick={onClick} className="text-color-item">
       <div className="value__wrapper">
         <div style={{backgroundColor: background}} className="letter__wrapper">
           <span style={{color}}>A</span>
@@ -18,7 +18,7 @@ const ListLetterItem = ({ color, colorName, active, onClick, background }: IList
         <p>{colorName}</p>
       </div>
       {active && <FaCheck />}
-    </div>
+    </button>
   );
 };
 

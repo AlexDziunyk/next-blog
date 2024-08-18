@@ -2,70 +2,70 @@ import { Level } from "@tiptap/extension-heading";
 import { Editor } from "@tiptap/react";
 
 export const useMyEditor = (editor: Editor) => {
-  const editorStart = editor.chain().focus();
+  const editorStart = editor.chain().focus;
 
   const handleBold = () => {
-    editorStart.toggleBold().run();
+    editorStart().toggleBold().run();
   };
 
   const handleItalic = () => {
-    editorStart.toggleItalic().run();
+    editorStart().toggleItalic().run();
   };
 
   const handleUnderline = () => {
-    editorStart.toggleUnderline().run();
+    editorStart().toggleUnderline().run();
   };
 
   const handleLineThrough = () => {
-    editorStart.toggleStrike().run();
+    editorStart().toggleStrike().run();
   };
 
   const handleCode = () => {
-    editorStart.toggleCode().run();
+    editorStart().toggleCode().run();
   };
 
   const handleSaveLink = (linkValue: string) => {
-    editorStart.setLink({ href: linkValue }).run();
+    editorStart().setLink({ href: linkValue }).run();
   };
 
   const handleLink = () => {
-    editorStart.unsetLink().run()
+    editorStart().unsetLink().run()
   };
 
   const handleColor = (color: string, index: number) => {
     if (index === 0) {
-      editorStart.unsetColor().run();
+      editorStart().unsetColor().run();
     } else {
-      editorStart.setColor(color).run();
+      editorStart().setColor(color).run();
     }
   };
 
   const handleHighlight = (color: string, index: number) => {
     if (index === 0) {
-      editorStart.unsetHighlight().run();
+      editorStart().unsetHighlight().run();
     } else {
-      editorStart.toggleHighlight({ color }).run();
+      editorStart().toggleHighlight({ color }).run();
     }
   };
 
   const handleHeading = (level: Level) => {
-    editorStart.toggleHeading(({ level })).run();
+    editorStart().toggleHeading(({ level })).run();
   }
 
   const handleBlockquote = () => {
-    editorStart.toggleBlockquote().run();
+    editorStart().toggleBlockquote().run();
   }
 
   const handleBulletList = () => {
-    editorStart.toggleBulletList().run();
+    editorStart().toggleBulletList().run();
   }
 
   const handleOrderedList = () => {
-    editorStart.toggleOrderedList().run();
+    editorStart().toggleOrderedList().run();
   }
 
   const handleTaskList = () => {
-    editorStart.toggleTaskList().run();
+    editorStart().toggleTaskList().run();
   }
 
   return { handleBold, handleCode, handleItalic, handleLineThrough, handleUnderline, handleLink, handleSaveLink, handleColor, handleHighlight, handleHeading, handleBlockquote, handleBulletList, handleOrderedList, handleTaskList };

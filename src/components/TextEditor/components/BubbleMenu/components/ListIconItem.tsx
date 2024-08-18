@@ -10,7 +10,7 @@ interface IListIconItemProps {
 
 const ListIconItem = ({ active, name, Icon, onClick }: IListIconItemProps) => {
   return (
-    <div onClick={onClick} className="text-color-item">
+    <button type="button" onClick={onClick} className="text-color-item">
       <div className="value__wrapper">
         <div className="letter__wrapper">
           <Icon />
@@ -18,7 +18,7 @@ const ListIconItem = ({ active, name, Icon, onClick }: IListIconItemProps) => {
         <p>{name}</p>
       </div>
       {active && <FaCheck />}
-    </div>
+    </button>
   );
 };
 

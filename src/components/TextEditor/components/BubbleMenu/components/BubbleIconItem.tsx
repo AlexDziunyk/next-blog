@@ -9,7 +9,7 @@ interface IBubbleIconItemProps {
 
 const BubbleIconItem = ({ onClick, Icon, size = 14, active }: IBubbleIconItemProps) => {
   return (
-    <button onClick={onClick} className={`bubble-icon-item ${active ? "active" : ""}`}>
+    <button type="button" onClick={onClick} className={`bubble-icon-item ${active ? "active" : ""}`}>
       <Icon size={size} />
     </button>
   );

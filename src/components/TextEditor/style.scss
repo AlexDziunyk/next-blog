@@ -1,0 +1,16 @@
+.tiptap {
+  outline: none;
+
+  p {
+    margin: 0;
+  }
+
+  [data-type="taskList"] {
+    li {
+      list-style-type: none;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+}
