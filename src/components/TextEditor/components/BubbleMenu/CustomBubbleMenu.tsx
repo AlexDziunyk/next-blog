@@ -56,25 +56,8 @@ const CustomBubbleMenu = ({ editor }: IBubbleMenuProps) => {
     handleHeading,
     handleOrderedList,
     handleTaskList,
+    handleImage,
   } = useMyEditor(editor);
-
-  const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const reader = new FileReader();
-
-    if (e.target.files && e.target.files[0]) {
-      const file: File = e.target.files?.[0];
-
-      reader.onloadend = () => {
-        editor
-          .chain()
-          .focus()
-          .setImage({ src: reader.result as string })
-          .run();
-      };
-
-      reader.readAsDataURL(file);
-    }
-  };
 
   useEffect(() => {
     const handleClickLinkOutSide = (event: MouseEvent) => {

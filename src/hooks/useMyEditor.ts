@@ -68,5 +68,23 @@ export const useMyEditor = (editor: Editor) => {
     editorStart().toggleTaskList().run();
   }
 
-  return { handleBold, handleCode, handleItalic, handleLineThrough, handleUnderline, handleLink, handleSaveLink, handleColor, handleHighlight, handleHeading, handleBlockquote, handleBulletList, handleOrderedList, handleTaskList };
+  const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const reader = new FileReader();
+
+    if (e.target.files && e.target.files[0]) {
+      const file: File = e.target.files?.[0];
+
+      reader.onloadend = () => {
+        editor
+          .chain()
+          .focus()
+          .setImage({ src: reader.result as string })
+          .run();
+      };
+
+      reader.readAsDataURL(file);
+    }
+  };
+
+  return { handleBold, handleCode, handleItalic, handleLineThrough, handleUnderline, handleLink, handleSaveLink, handleColor, handleHighlight, handleHeading, handleBlockquote, handleBulletList, handleOrderedList, handleTaskList, handleImage };
 } 

@@ -12,7 +12,7 @@ const TextEditor = () => {
   });
 
   return (
-    <div>
+    <div className="text-editor">
       {editor && <CustomBubbleMenu editor={editor} />}
       <EditorContent editor={editor} />
     </div>
