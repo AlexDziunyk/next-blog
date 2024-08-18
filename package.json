@@ -11,8 +11,11 @@
   "dependencies": {
     "@react-icons/all-files": "^4.1.0",
     "@tiptap/extension-bubble-menu": "^2.6.4",
+    "@tiptap/extension-color": "^2.6.4",
+    "@tiptap/extension-highlight": "^2.6.4",
     "@tiptap/extension-link": "^2.6.4",
     "@tiptap/extension-placeholder": "^2.6.4",
+    "@tiptap/extension-text-style": "^2.6.4",
     "@tiptap/extension-underline": "^2.6.4",
     "@tiptap/pm": "^2.6.4",
     "@tiptap/react": "^2.6.4",
