@@ -22,12 +22,15 @@ import { MdFormatListBulleted } from "react-icons/md";
 import { GoListOrdered } from "react-icons/go";
 import { GoTasklist } from "react-icons/go";
 import { MdOutlineTextFields } from "react-icons/md";
+import { CiImageOn } from "react-icons/ci";
 
 interface IBubbleMenuProps {
   editor: Editor;
 }
 
 const CustomBubbleMenu = ({ editor }: IBubbleMenuProps) => {
+  const imageRef = useRef<HTMLInputElement>(null);
+
   const [linkList, setLinkList] = useState<boolean>(false);
   const linkListRef = useRef<HTMLInputElement>(null);
   const [linkValue, setLinkValue] = useState<string>("");
@@ -54,6 +57,24 @@ const CustomBubbleMenu = ({ editor }: IBubbleMenuProps) => {
     handleOrderedList,
     handleTaskList,
   } = useMyEditor(editor);
+
+  const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const reader = new FileReader();
+
+    if (e.target.files && e.target.files[0]) {
+      const file: File = e.target.files?.[0];
+
+      reader.onloadend = () => {
+        editor
+          .chain()
+          .focus()
+          .setImage({ src: reader.result as string })
+          .run();
+      };
+
+      reader.readAsDataURL(file);
+    }
+  };
 
   useEffect(() => {
     const handleClickLinkOutSide = (event: MouseEvent) => {
@@ -148,6 +169,18 @@ const CustomBubbleMenu = ({ editor }: IBubbleMenuProps) => {
         <BubbleIconList
           onClick={() => setTextList(true)}
           Icon={MdOutlineTextFields}
+        />
+        <BubbleIconItem
+          //active={editor.isActive("image")}
+          onClick={() => imageRef.current?.click()}
+          Icon={CiImageOn}
+        />
+        <input
+          onChange={(e) => handleImage(e)}
+          accept="image/*"
+          ref={imageRef}
+          hidden
+          type="file"
         />
         {linkList && !editor.isActive("link") && (
           <BubbleSelectList>
