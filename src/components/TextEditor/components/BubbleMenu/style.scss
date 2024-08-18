@@ -6,7 +6,6 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  // gap: 2px;
   border-radius: 8px;
   box-shadow: rgba(0, 0, 0, 0.07) 0px 16px 24px 0px,
     rgba(0, 0, 0, 0.1) 0px 2px 6px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
@@ -36,7 +35,7 @@
 }
 
 .bubble-select-list {
-  margin-top: 30px;
+  margin-top: 4%;
   z-index: 3;
   position: absolute;
   box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px,
@@ -57,7 +56,7 @@
     }
   }
 
-  .color__wrapper {
+  .color__wrapper, .text__wrapper {
     display: flex;
     flex-direction: column;
     width: 240px;

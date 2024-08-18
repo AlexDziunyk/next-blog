@@ -1,14 +1,14 @@
 import { FaCheck } from "react-icons/fa6";
 
-interface ITextColorItemProps {
+interface IListLetterItemProps {
   onClick: () => void;
   color?: string;
   background?: string;
   colorName: string;
-  active?: boolean;
+  active: boolean;
 }
 
-const TextColorItem = ({ color, colorName, active, onClick, background }: ITextColorItemProps) => {
+const ListLetterItem = ({ color, colorName, active, onClick, background }: IListLetterItemProps) => {
   return (
     <div onClick={onClick} className="text-color-item">
       <div className="value__wrapper">
@@ -22,4 +22,4 @@ const TextColorItem = ({ color, colorName, active, onClick, background }: ITextC
   );
 };
 
-export default TextColorItem;
+export default ListLetterItem;

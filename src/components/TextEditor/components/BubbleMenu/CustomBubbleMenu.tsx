@@ -11,9 +11,17 @@ import Input from "@/components/Input/Input";
 import BubbleIconList from "./components/BubbleIconList";
 import { useEffect, useRef, useState } from "react";
 import { BiFontColor } from "react-icons/bi";
-import TextColorItem from "./components/TextColorItem";
 import { backgroundsArr, colorsArr, IColorObj } from "@/utils/colors";
 import "./style.scss";
+import { useMyEditor } from "@/hooks/useMyEditor";
+import ListLetterItem from "./components/ListLetterItem";
+import ListIconItem from "./components/ListIconItem";
+import { TbH1, TbH2, TbH3 } from "react-icons/tb";
+import { BsBlockquoteLeft } from "react-icons/bs";
+import { MdFormatListBulleted } from "react-icons/md";
+import { GoListOrdered } from "react-icons/go";
+import { GoTasklist } from "react-icons/go";
+import { MdOutlineTextFields } from "react-icons/md";
 
 interface IBubbleMenuProps {
   editor: Editor;
@@ -27,59 +35,28 @@ const CustomBubbleMenu = ({ editor }: IBubbleMenuProps) => {
   const [colorList, setColorList] = useState<boolean>(false);
   const colorListRef = useRef<HTMLInputElement>(null);
 
-  const handleBold = () => {
-    editor.chain().focus().toggleBold().run();
-  };
+  const [textList, setTextList] = useState<boolean>(false);
+  const textListRef = useRef<HTMLInputElement>(null);
 
-  const handleItalic = () => {
-    editor.chain().focus().toggleItalic().run();
-  };
-
-  const handleUnderline = () => {
-    editor.chain().focus().toggleUnderline().run();
-  };
-
-  const handleLineThrough = () => {
-    editor.chain().focus().toggleStrike().run();
-  };
-
-  const handleCode = () => {
-    editor.chain().focus().toggleCode().run();
-  };
-
-  const handleSaveLink = () => {
-    editor.chain().focus().setLink({ href: linkValue }).run();
-    setLinkList(false);
-  };
-
-  const handleLink = () => {
-    if (editor.isActive("link")) {
-      editor.chain().focus().unsetLink().run();
-    } else {
-      setLinkList(true);
-    }
-  };
+  const {
+    handleBold,
+    handleCode,
+    handleColor,
+    handleHighlight,
+    handleItalic,
+    handleLineThrough,
+    handleLink,
+    handleSaveLink,
+    handleUnderline,
+    handleBlockquote,
+    handleBulletList,
+    handleHeading,
+    handleOrderedList,
+    handleTaskList,
+  } = useMyEditor(editor);
 
   const handleOpenColorList = () => {
     setColorList(true);
-  };
-
-  const handleColor = (color: string, index: number) => {
-    if (index === 0) {
-      editor.chain().focus().unsetColor().run();
-    } else {
-      editor.chain().focus().setColor(color).run();
-    }
-    setColorList(false);
-  };
-
-  const handleHighlight = (color: string, index: number) => {
-    if (index === 0) {
-      editor.chain().focus().unsetHighlight().run();
-    } else {
-      editor.chain().focus().toggleHighlight({ color }).run();
-    }
-    setColorList(false);
   };
 
   useEffect(() => {
@@ -102,12 +79,23 @@ const CustomBubbleMenu = ({ editor }: IBubbleMenuProps) => {
       }
     };
 
+    const handleClickTextOutside = (event: MouseEvent) => {
+      if (
+        textListRef.current &&
+        !textListRef.current.contains(event.target as Node)
+      ) {
+        setTextList(false);
+      }
+    };
+
     document.addEventListener("mousedown", handleClickLinkOutSide);
     document.addEventListener("mousedown", handleClickColorsOutSide);
+    document.addEventListener("mousedown", handleClickTextOutside);
 
     return () => {
       document.removeEventListener("mousedown", handleClickLinkOutSide);
-      document.addEventListener("mousedown", handleClickColorsOutSide);
+      document.removeEventListener("mousedown", handleClickColorsOutSide);
+      document.removeEventListener("mousedown", handleClickTextOutside);
     };
   }, [linkListRef]);
 
@@ -151,10 +139,20 @@ const CustomBubbleMenu = ({ editor }: IBubbleMenuProps) => {
         />
         <BubbleIconList
           active={editor.isActive("link")}
-          onClick={handleLink}
+          onClick={() => {
+            if (editor.isActive("link")) {
+              handleLink();
+            } else {
+              setLinkList(true);
+            }
+          }}
           Icon={IoIosLink}
         />
-        <BubbleIconList onClick={handleOpenColorList} Icon={BiFontColor} />
+        <BubbleIconList onClick={() => setColorList(true)} Icon={BiFontColor} />
+        <BubbleIconList
+          onClick={() => setTextList(true)}
+          Icon={MdOutlineTextFields}
+        />
       </BubbleMenu>
       {linkList && !editor.isActive("link") && (
         <BubbleSelectList>
@@ -166,7 +164,10 @@ const CustomBubbleMenu = ({ editor }: IBubbleMenuProps) => {
             />
             <button
               disabled={linkValue.length === 0}
-              onClick={handleSaveLink}
+              onClick={() => {
+                handleSaveLink(linkValue);
+                setLinkList(false);
+              }}
               className="link__button_save"
             >
               Save Link
@@ -180,9 +181,12 @@ const CustomBubbleMenu = ({ editor }: IBubbleMenuProps) => {
             <span className="section__title">Color</span>
             <div className="colors__col">
               {colorsArr.map(({ color, colorName }: IColorObj, index) => (
-                <TextColorItem
+                <ListLetterItem
                   key={index}
-                  onClick={() => handleColor(color, index)}
+                  onClick={() => {
+                    handleColor(color, index);
+                    setColorList(false);
+                  }}
                   color={color}
                   colorName={colorName}
                   active={editor.isActive("textStyle", { color })}
@@ -192,15 +196,81 @@ const CustomBubbleMenu = ({ editor }: IBubbleMenuProps) => {
             <span className="section__title">Background</span>
             <div className="colors__col">
               {backgroundsArr.map(({ color, colorName }: IColorObj, index) => (
-                <TextColorItem
+                <ListLetterItem
                   key={index}
-                  onClick={() => handleHighlight(color, index)}
+                  onClick={() => {
+                    handleHighlight(color, index);
+                    setColorList(false);
+                  }}
                   background={color}
                   colorName={colorName}
                   active={editor.isActive("highlight", { color })}
                 />
               ))}
             </div>
+          </div>
+        </BubbleSelectList>
+      )}
+      {textList && (
+        <BubbleSelectList>
+          <div ref={textListRef} className="text__wrapper">
+            <span className="section__title">Turn into</span>
+            <ListIconItem
+              onClick={() => {
+                handleHeading(1);
+                setTextList(false);
+              }}
+              Icon={TbH1}
+              name={"Heading 1"}
+            />
+            <ListIconItem
+              onClick={() => {
+                handleHeading(2);
+                setTextList(false);
+              }}
+              Icon={TbH2}
+              name={"Heading 2"}
+            />
+            <ListIconItem
+              onClick={() => {
+                handleHeading(3);
+                setTextList(false);
+              }}
+              Icon={TbH3}
+              name={"Heading 3"}
+            />
+            <ListIconItem
+              onClick={() => {
+                handleBlockquote();
+                setTextList(false);
+              }}
+              Icon={BsBlockquoteLeft}
+              name={"Quote"}
+            />
+            <ListIconItem
+              onClick={() => {
+                handleBulletList();
+                setTextList(false);
+              }}
+              Icon={MdFormatListBulleted}
+              name={"Bullet list"}
+            />
+            <ListIconItem
+              onClick={() => {
+                handleOrderedList();
+                setTextList(false);
+              }}
+              Icon={GoListOrdered}
+              name={"Ordered list"}
+            />
+            <ListIconItem
+              onClick={() => {
+                handleTaskList();
+                setTextList(false);
+              }}
+              Icon={GoTasklist}
+              name={"Task list"}
+            />
           </div>
         </BubbleSelectList>
       )}
