@@ -11,7 +11,11 @@ import Input from "@/components/Input/Input";
 import BubbleIconList from "./components/BubbleIconList";
 import { useEffect, useRef, useState } from "react";
 import { BiFontColor } from "react-icons/bi";
-import { backgroundsArr, colorsArr, IColorObj } from "@/utils/colors";
+import {
+  backgroundsArr,
+  colorsArr,
+  IColorObj,
+} from "@/utils/textEditor/colors";
 import "./style.scss";
 import { useMyEditor } from "@/hooks/useMyEditor";
 import ListLetterItem from "./components/ListLetterItem";
@@ -22,15 +26,12 @@ import { MdFormatListBulleted } from "react-icons/md";
 import { GoListOrdered } from "react-icons/go";
 import { GoTasklist } from "react-icons/go";
 import { MdOutlineTextFields } from "react-icons/md";
-import { CiImageOn } from "react-icons/ci";
 
 interface IBubbleMenuProps {
   editor: Editor;
 }
 
 const CustomBubbleMenu = ({ editor }: IBubbleMenuProps) => {
-  const imageRef = useRef<HTMLInputElement>(null);
-
   const [linkList, setLinkList] = useState<boolean>(false);
   const linkListRef = useRef<HTMLInputElement>(null);
   const [linkValue, setLinkValue] = useState<string>("");
@@ -56,7 +57,6 @@ const CustomBubbleMenu = ({ editor }: IBubbleMenuProps) => {
     handleHeading,
     handleOrderedList,
     handleTaskList,
-    handleImage,
   } = useMyEditor(editor);
 
   useEffect(() => {
@@ -88,6 +88,7 @@ const CustomBubbleMenu = ({ editor }: IBubbleMenuProps) => {
       }
     };
 
+
     document.addEventListener("mousedown", handleClickLinkOutSide);
     document.addEventListener("mousedown", handleClickColorsOutSide);
     document.addEventListener("mousedown", handleClickTextOutside);
@@ -97,7 +98,7 @@ const CustomBubbleMenu = ({ editor }: IBubbleMenuProps) => {
       document.removeEventListener("mousedown", handleClickColorsOutSide);
       document.removeEventListener("mousedown", handleClickTextOutside);
     };
-  }, [linkListRef]);
+  }, []);
 
   useEffect(() => {
     if (linkList === false) {
@@ -152,18 +153,6 @@ const CustomBubbleMenu = ({ editor }: IBubbleMenuProps) => {
         <BubbleIconList
           onClick={() => setTextList(true)}
           Icon={MdOutlineTextFields}
-        />
-        <BubbleIconItem
-          //active={editor.isActive("image")}
-          onClick={() => imageRef.current?.click()}
-          Icon={CiImageOn}
-        />
-        <input
-          onChange={(e) => handleImage(e)}
-          accept="image/*"
-          ref={imageRef}
-          hidden
-          type="file"
         />
         {linkList && !editor.isActive("link") && (
           <BubbleSelectList>

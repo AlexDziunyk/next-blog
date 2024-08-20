@@ -75,9 +75,7 @@ export const useMyEditor = (editor: Editor) => {
       const file: File = e.target.files?.[0];
 
       reader.onloadend = () => {
-        editor
-          .chain()
-          .focus()
+        editorStart()
           .setImage({ src: reader.result as string })
           .run();
       };
@@ -86,5 +84,13 @@ export const useMyEditor = (editor: Editor) => {
     }
   };
 
-  return { handleBold, handleCode, handleItalic, handleLineThrough, handleUnderline, handleLink, handleSaveLink, handleColor, handleHighlight, handleHeading, handleBlockquote, handleBulletList, handleOrderedList, handleTaskList, handleImage };
+  const handleYoutube = (url: string) => {
+    editorStart().setYoutubeVideo({
+      src: url,
+      width: 640,
+      height: 480,
+    }).run();
+  }
+
+  return { handleBold, handleCode, handleItalic, handleLineThrough, handleUnderline, handleLink, handleSaveLink, handleColor, handleHighlight, handleHeading, handleBlockquote, handleBulletList, handleOrderedList, handleTaskList, handleImage, handleYoutube };
 } 

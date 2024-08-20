@@ -18,6 +18,7 @@ import StarterKit from "@tiptap/starter-kit";
 import Youtube from '@tiptap/extension-youtube'
 import Image from "@tiptap/extension-image";
 
+
 export const tiptapExtensions = [
   StarterKit,
   Document,
@@ -48,4 +49,5 @@ export const tiptapExtensions = [
   }),
   Placeholder.configure({ placeholder: "Write something..." }),
 ];
+
 

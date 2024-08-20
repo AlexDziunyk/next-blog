@@ -1,0 +1,33 @@
+.floating-menu {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 16px 24px 0px,
+    rgba(0, 0, 0, 0.1) 0px 2px 6px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+  background-color: white;
+  padding: 4px;
+
+  .bubble-icon-item {
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 6px;
+    border: none;
+    border-radius: 8px;
+    background: none;
+
+    &.active,
+    &:hover {
+      background-color: rgba(173, 173, 173, 0.3);
+    }
+
+    &:active {
+      background-color: rgba(173, 173, 173, 0.5);
+    }
+  }
+
+}
