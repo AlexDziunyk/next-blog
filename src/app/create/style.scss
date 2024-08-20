@@ -1,0 +1,18 @@
+.create {
+  font-family: "DM Serif Text", serif;
+  .create__editor {
+    .title__input__wrapper {
+      padding: 0 20vw;
+      margin: 20px 0px;
+      border: none;
+      .title__input {
+        font-family: "DM Serif Text", serif;
+        font-weight: 700;
+        border: none;
+        font-size: 40px;
+        width: 100%;
+        text-align: left;
+      }
+    }
+  }
+}

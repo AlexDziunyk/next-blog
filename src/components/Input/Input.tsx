@@ -2,8 +2,8 @@ import { ChangeEvent, useEffect, useRef } from "react";
 import "./style.scss";
 
 interface IInputProps {
-  value?: string | number;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  value: string | number;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   inputClassName?: string;
   inputWrapperClassName?: string;
   placeholder: string;
@@ -16,7 +16,6 @@ const Input = ({
   inputWrapperClassName,
   placeholder,
 }: IInputProps) => {
-
   
   return (
     <div className={`input__wrapper ${inputWrapperClassName}`}>

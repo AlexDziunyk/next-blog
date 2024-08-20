@@ -9,7 +9,7 @@ import CustomFloatingMenu from "./components/FloatingMenu/CustomFloatingMenu";
 const TextEditor = () => {
   const editor = useEditor({
     extensions: tiptapExtensions,
-    content: "<p>Hello World! 🌎️</p>",
+    content: "",
   });
 
   return (

@@ -38,7 +38,6 @@ const CustomFloatingMenu = ({ editor }: IFloatingMenu) => {
     };
   }, []);
 
-
   useEffect(() => {
     if (youtubeList === false) {
       setYoutubeValue("");
@@ -46,7 +45,7 @@ const CustomFloatingMenu = ({ editor }: IFloatingMenu) => {
   }, [youtubeList]);
 
   return (
-    <FloatingMenu className="floating-menu" editor={editor}>
+    <FloatingMenu className="floating-menu" editor={editor} tippyOptions={{duration: 100}}>
       <BubbleIconItem onClick={() => setYoutubeList(true)} Icon={FaYoutube} />
       <BubbleIconItem
         onClick={() => imageRef.current?.click()}
@@ -60,27 +59,27 @@ const CustomFloatingMenu = ({ editor }: IFloatingMenu) => {
         type="file"
       />
       {youtubeList && !editor.isActive("link") && (
-          <BubbleSelectList>
+        <BubbleSelectList>
           <div ref={youtubeListRef} className="link__wrapper">
-              <Input
-                value={youtubeValue}
-                onChange={(e) => setYoutubeValue(e.target.value)}
-                placeholder="Write youtube link here"
-              />
-              <button
-                disabled={youtubeValue.length === 0}
-                type="button"
-                onClick={() => {
-                  handleYoutube(youtubeValue);
-                  setYoutubeList(false);
-                }}
-                className="link__button_save"
-              >
-                Save Link
-              </button>
-            </div>
-          </BubbleSelectList>
-        )}
+            <Input
+              value={youtubeValue}
+              onChange={(e) => setYoutubeValue(e.target.value)}
+              placeholder="Write youtube link here"
+            />
+            <button
+              disabled={youtubeValue.length === 0}
+              type="button"
+              onClick={() => {
+                handleYoutube(youtubeValue);
+                setYoutubeList(false);
+              }}
+              className="link__button_save"
+            >
+              Save Link
+            </button>
+          </div>
+        </BubbleSelectList>
+      )}
     </FloatingMenu>
   );
 };
