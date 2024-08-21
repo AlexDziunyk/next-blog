@@ -1,21 +1,23 @@
-import Button, { buttonTypes } from '../Button/Button';
-import './style.scss';
+import Button, { buttonTypes } from "../Button/Button";
+import "./style.scss";
 
 const Navbar = () => {
   return (
-    <nav className='container navbar'>
-      <h1>Logo</h1>
-      <ul>
-        <li>Home</li>
-        <li></li>
-        <li></li>
-      </ul>
-      <div className='navbar__buttons'>
-        <Button text={"Login"} />
-        <Button text={"Sing Up"} buttonType={buttonTypes.INVERT} />
+    <nav className="navbar__wrapper">
+      <div className="container navbar">
+        <h1>Logo</h1>
+        <ul>
+          <li>Home</li>
+          <li></li>
+          <li></li>
+        </ul>
+        <div className="navbar__buttons">
+          <Button text={"Login"} />
+          <Button text={"Sing Up"} buttonType={buttonTypes.INVERT} />
+        </div>
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
