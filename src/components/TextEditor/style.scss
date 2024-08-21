@@ -1,5 +1,6 @@
 .text-editor {
-  overflow: hidden;
+
+
   .tiptap {
     font-size: 20px;
     padding: 0 20vw;
@@ -23,6 +24,10 @@
     //   float: left;
     //   height: 0;
     //   pointer-events: none;
+    // }
+
+    // ::-webkit-scrollbar {
+    //   display: none;
     // }
 
     ::selection {

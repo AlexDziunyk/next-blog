@@ -1,5 +1,3 @@
-"use client";
-
 import { useEditor, EditorContent } from "@tiptap/react";
 import CustomBubbleMenu from "./components/BubbleMenu/CustomBubbleMenu";
 import "./style.scss";

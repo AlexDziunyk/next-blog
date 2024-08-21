@@ -1,3 +1,4 @@
+import { downloadFile } from "@/utils/downloadFile";
 import { Level } from "@tiptap/extension-heading";
 import { Editor } from "@tiptap/react";
 
@@ -69,19 +70,11 @@ export const useMyEditor = (editor: Editor) => {
   }
 
   const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const reader = new FileReader();
-
-    if (e.target.files && e.target.files[0]) {
-      const file: File = e.target.files?.[0];
-
-      reader.onloadend = () => {
-        editorStart()
-          .setImage({ src: reader.result as string })
-          .run();
-      };
-
-      reader.readAsDataURL(file);
-    }
+    downloadFile(e, (reader) => {
+      editorStart()
+        .setImage({ src: reader.result as string })
+        .run();
+    });
   };
 
   const handleYoutube = (url: string) => {

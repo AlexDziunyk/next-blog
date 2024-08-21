@@ -1,0 +1,59 @@
+.cover {
+  .cover__image__wrapper,
+  .cover__add,
+  .cover__image {
+    transition: 0.3s;
+    position: absolute;
+    height: 240px;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+  }
+
+
+  .cover__image__wrapper {
+    cursor: pointer;
+    background-color: black;
+  }
+
+  .cross {
+    color: white;
+    z-index: 3;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    opacity: 0;
+  }
+  
+  &:hover {
+    .cover__image {
+      opacity: 0.5;
+    }
+
+    .cross {
+      opacity: 1;
+    }
+  }
+
+
+  .cover__add {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(242, 241, 238);
+    transition: 0.3s;
+    width: 100%;
+
+    &:hover {
+      background: rgb(224, 224, 221);
+    }
+
+    .text {
+      margin: 0;
+      margin-left: 10px;
+      font-size: 30px;
+    }
+  }
+}

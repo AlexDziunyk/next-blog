@@ -1,6 +1,12 @@
 .create {
   font-family: "DM Serif Text", serif;
+  position: relative;
+  overflow: hidden;
+
+
   .create__editor {
+    padding-top: 240px;
+    padding-bottom: 40px;
     .title__input__wrapper {
       padding: 0 20vw;
       margin: 20px 0px;

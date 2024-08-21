@@ -21,6 +21,13 @@ const CustomFloatingMenu = ({ editor }: IFloatingMenu) => {
   const youtubeListRef = useRef<HTMLInputElement>(null);
   const [youtubeValue, setYoutubeValue] = useState<string>("");
 
+  const handleImageClick = () => {
+    if (imageRef && imageRef.current) {
+      imageRef.current.click();
+      imageRef.current.value = "";
+    }
+  };
+
   useEffect(() => {
     const handleClickYoutubeOutside = (event: MouseEvent) => {
       if (
@@ -45,12 +52,13 @@ const CustomFloatingMenu = ({ editor }: IFloatingMenu) => {
   }, [youtubeList]);
 
   return (
-    <FloatingMenu className="floating-menu" editor={editor} tippyOptions={{duration: 100}}>
+    <FloatingMenu
+      className="floating-menu"
+      editor={editor}
+      tippyOptions={{ duration: 100 }}
+    >
       <BubbleIconItem onClick={() => setYoutubeList(true)} Icon={FaYoutube} />
-      <BubbleIconItem
-        onClick={() => imageRef.current?.click()}
-        Icon={CiImageOn}
-      />
+      <BubbleIconItem onClick={handleImageClick} Icon={CiImageOn} />
       <input
         onChange={(e) => handleImage(e)}
         accept="image/*"

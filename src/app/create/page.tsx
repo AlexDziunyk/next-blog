@@ -2,14 +2,16 @@
 import TextEditor from "@/components/TextEditor/TextEditor";
 import "./style.scss";
 import Input from "@/components/Input/Input";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
+import Cover from "@/components/Cover/Cover";
 
 const Create = () => {
   const [titleValue, setTitleValue] = useState("");
 
   return (
     <div className="create">
-      <div className="create__editor">
+      <Cover />
+      <div className="container create__editor">
         <Input
           inputWrapperClassName="title__input__wrapper"
           inputClassName="title__input"

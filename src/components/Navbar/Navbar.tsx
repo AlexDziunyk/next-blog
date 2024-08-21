@@ -3,7 +3,7 @@ import './style.scss';
 
 const Navbar = () => {
   return (
-    <nav className='navbar'>
+    <nav className='container navbar'>
       <h1>Logo</h1>
       <ul>
         <li>Home</li>
