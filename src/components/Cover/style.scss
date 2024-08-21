@@ -11,21 +11,30 @@
     object-fit: cover;
   }
 
-
   .cover__image__wrapper {
-    cursor: pointer;
     background-color: black;
   }
 
+  .cover__image {
+    cursor: pointer;
+  }
+
   .cross {
+    cursor: pointer;
     color: white;
     z-index: 3;
     position: absolute;
     top: 20px;
     right: 20px;
     opacity: 0;
+    transition: 0.3s;
+
+    &:hover {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
   }
-  
+
   &:hover {
     .cover__image {
       opacity: 0.5;
@@ -35,7 +44,6 @@
       opacity: 1;
     }
   }
-
 
   .cover__add {
     cursor: pointer;
