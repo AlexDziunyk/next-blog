@@ -88,7 +88,6 @@ const CustomBubbleMenu = ({ editor }: IBubbleMenuProps) => {
       }
     };
 
-
     document.addEventListener("mousedown", handleClickLinkOutSide);
     document.addEventListener("mousedown", handleClickColorsOutSide);
     document.addEventListener("mousedown", handleClickTextOutside);

@@ -1,18 +1,14 @@
-"use client";
-
-import { navigate } from "@/utils/navigatorActions";
 import Button, { buttonTypes } from "../Button/Button";
 import "./style.scss";
-import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 const Navbar = () => {
-  const path = usePathname();
-
   return (
     <nav className="navbar__wrapper">
       <div className="container navbar">
-        <h1>Logo</h1>
+        <Link className="logo" href={"/"}>
+          <h1>Logo</h1>
+        </Link>
         <ul>
           <li>Home</li>
           <li></li>

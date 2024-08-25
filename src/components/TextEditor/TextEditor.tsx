@@ -1,14 +1,14 @@
-import { useEditor, EditorContent } from "@tiptap/react";
+import { EditorContent, Editor } from "@tiptap/react";
 import CustomBubbleMenu from "./components/BubbleMenu/CustomBubbleMenu";
 import "./style.scss";
 import { tiptapExtensions } from "@/utils/textEditor/tiptapExtensions";
 import CustomFloatingMenu from "./components/FloatingMenu/CustomFloatingMenu";
 
-const TextEditor = () => {
-  const editor = useEditor({
-    extensions: tiptapExtensions,
-    content: "",
-  });
+interface ITextEditorProps {
+  editor: Editor | null;
+}
+
+const TextEditor = ({editor}: ITextEditorProps) => {
 
   return (
     <div className="text-editor">

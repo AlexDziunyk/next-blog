@@ -1,19 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import "./style.scss";
-import { login, signup } from "@/utils/authActions";
-import { cleanQuery, navigate } from "@/utils/navigatorActions";
+import { useState } from "react";
+import { signup } from "@/utils/authActions";
 import InputWithLabel from "@/components/InputWithLabel/InputWithLabel";
 import Button from "@/components/Button/Button";
 import Link from "next/link";
 import Modal from "@/components/Modal/Modal";
+import "./style.scss";
 
 const SignupModal = () => {
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log("start");
     const formData = new FormData();
@@ -29,7 +28,7 @@ const SignupModal = () => {
     <Modal>
       <div className="signup__modal">
         <h2>Sign Up</h2>
-        <form className="signup">
+        <form onSubmit={handleSignUp} className="signup">
           <InputWithLabel
             inputWrapperClassName="login-input__wrapper"
             inputClassName="login-input"
@@ -47,8 +46,8 @@ const SignupModal = () => {
             onChange={(e) => setPasswordValue(e.target.value)}
             placeholder={""}
           />
-          <Button type="submit">Login</Button>
-          {/* <Link href="/signup">Sign Up</Link> */}
+          <Button type="submit">Sign Up</Button>
+          <Link href="/login">Login</Link>
         </form>
       </div>
     </Modal>

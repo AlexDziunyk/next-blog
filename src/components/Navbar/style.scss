@@ -4,26 +4,30 @@
   h1 {
     margin: 0;
   }
-  
+
   .navbar {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-  
+
+    .logo {
+      text-decoration: none;
+      color: black;
+    }
+
     ul {
       display: flex;
-  
+
       li {
         list-style: none;
       }
     }
-  
+
     .navbar__buttons {
       display: flex;
       flex-direction: row;
       gap: 10px;
     }
   }
-  
 }

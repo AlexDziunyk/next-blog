@@ -4,9 +4,14 @@ import { downloadFile } from "@/utils/downloadFile";
 import { IoClose } from "react-icons/io5";
 import "./style.scss";
 
-const Cover = () => {
+interface ICoverProps {
+  imageUrl: string;
+  setImageUrl: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const Cover = ({ imageUrl, setImageUrl }: ICoverProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [imageUrl, setImageUrl] = useState<string>("");
+  //const [imageUrl, setImageUrl] = useState<string>("");
 
   const handleClearImage = () => {
     setImageUrl("");

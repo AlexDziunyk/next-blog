@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.scss";
 import Navbar from "@/components/Navbar/Navbar";
-import LoginModal from "@/components/LoginModal/LoginModal";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import TanstackQuery from "@/context/TanstackQuery";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -24,9 +25,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={roboto.className}>
-        <Navbar />
-        {children}
-        {authModal}
+        <TanstackQuery>
+          <div>
+            <Navbar />
+            {children}
+            {authModal}
+          </div>
+        </TanstackQuery>
       </body>
     </html>
   );

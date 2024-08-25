@@ -2,11 +2,12 @@
 
 import { useState } from "react";
 import "./style.scss";
-import { signup } from "@/utils/authActions";
+import { login } from "@/utils/authActions";
 import InputWithLabel from "@/components/InputWithLabel/InputWithLabel";
 import Button from "@/components/Button/Button";
+import Link from "next/link";
 
-const LoginModal = () => {
+const Login = () => {
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
 
@@ -17,7 +18,7 @@ const LoginModal = () => {
     formData.append("email", emailValue);
     formData.append("password", passwordValue);
 
-    const result = await signup(formData);
+    const result = await login(formData);
 
     console.log(result);
   };
@@ -26,7 +27,7 @@ const LoginModal = () => {
     <div className="login__wrapper">
       <div className="login__page">
         <h2>Login</h2>
-        <form className="login">
+        <form onSubmit={handleLogin} className="login">
           <InputWithLabel
             inputWrapperClassName="login-input__wrapper"
             inputClassName="login-input"
@@ -44,11 +45,12 @@ const LoginModal = () => {
             onChange={(e) => setPasswordValue(e.target.value)}
             placeholder={""}
           />
-          <Button type="submit">Sign Up</Button>
+          <Button type="submit">Login</Button>
+          <Link href={"/signup"}>Signup</Link>
         </form>
       </div>
     </div>
   );
 };
 
-export default LoginModal;
+export default Login;

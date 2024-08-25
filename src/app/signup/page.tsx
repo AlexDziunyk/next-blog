@@ -5,12 +5,13 @@ import "./style.scss";
 import { signup } from "@/utils/authActions";
 import InputWithLabel from "@/components/InputWithLabel/InputWithLabel";
 import Button from "@/components/Button/Button";
+import Link from "next/link";
 
 const SignupModal = () => {
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("email", emailValue);
@@ -25,7 +26,7 @@ const SignupModal = () => {
     <div className="signup__wrapper">
       <div className="signup__page">
         <h2>Sign Up</h2>
-        <form className="signup__form">
+        <form onSubmit={handleSignup} className="signup__form">
           <InputWithLabel
             inputWrapperClassName="login-input__wrapper"
             inputClassName="login-input"
@@ -44,6 +45,7 @@ const SignupModal = () => {
             placeholder={""}
           />
           <Button type="submit">Sign Up</Button>
+          <Link href={"/signup"}>Signup</Link>
         </form>
       </div>
     </div>

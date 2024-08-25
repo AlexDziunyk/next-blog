@@ -1,12 +1,10 @@
-'use server'
+'use server';
 
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
 import { createClient } from '@/utils/supabase/server'
-import { useAuth } from '@/context/AuthContext'
 
-const { setError } = useAuth();
 
 export async function login(formData: FormData) {
   const supabase = createClient();
@@ -21,13 +19,17 @@ export async function login(formData: FormData) {
 
   const { error } = await supabase.auth.signInWithPassword(data)
 
+  console.log(error);
+
   if (error) {
-    setError(error.message);
+    console.log("bad")
+    //setError(error.message);
     redirect('/error')
   }
 
+  console.log("good")
   revalidatePath('/', 'layout')
-  redirect('/')
+  redirect('/');
 }
 
 export async function signup(formData: FormData) {
@@ -43,7 +45,7 @@ export async function signup(formData: FormData) {
   const { error } = await supabase.auth.signUp(data)
 
   if (error) {
-    setError(error.message);
+    //setError(error.message);
     redirect('/error')
   }
 

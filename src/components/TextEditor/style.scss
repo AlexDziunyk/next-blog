@@ -1,6 +1,4 @@
 .text-editor {
-
-
   .tiptap {
     font-size: 20px;
     padding: 0 20vw;
@@ -8,7 +6,6 @@
     // border: 1px solid black;
     border-radius: 8px;
     min-height: 400px;
-
 
     p.is-editor-empty:first-child::before {
       color: #adb5bd;
@@ -35,7 +32,7 @@
     }
 
     p {
-      margin: 0;  
+      margin: 0;
       line-height: 25px;
     }
 
