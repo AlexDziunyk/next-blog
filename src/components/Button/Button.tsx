@@ -1,21 +1,36 @@
-import './style.scss';
+import "./style.scss";
 
 interface IButtonProps {
-  text: string,
-  buttonClassName?: string,
-  buttonType?: string
-};
-
+  children: React.ReactNode;
+  buttonClassName?: string;
+  buttonType?: string;
+  onClick?: () => void;
+  type?: "submit" | "reset" | "button";
+}
 
 export const buttonTypes = {
   NORMAL: "normal__type",
-  INVERT: "invert__type"
-}
+  INVERT: "invert__type",
+};
 
-const Button = ({text, buttonClassName, buttonType = buttonTypes.NORMAL}: IButtonProps) => {
+const Button = ({
+  children,
+  onClick,
+  buttonClassName,
+  buttonType = buttonTypes.NORMAL,
+  type = "button",
+  ...props
+}: IButtonProps) => {
   return (
-    <button className={`button ${buttonType} ${buttonClassName}`}>{text}</button>
-  )
-}
+    <button
+      type={type}
+      onClick={onClick}
+      className={`button ${buttonType} ${buttonClassName}`}
+      {...props}
+    >
+      {children}
+    </button>
+  );
+};
 
 export default Button;

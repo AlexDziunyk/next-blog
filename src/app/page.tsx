@@ -1,12 +1,16 @@
-import Navbar from "@/components/Navbar/Navbar";
+"use client";
+import LoginModal from "@/components/LoginModal/LoginModal";
 import styles from "./page.module.css";
-import BlogItem from "@/components/BlogItem/BlogItem";
-import BigBlog from "@/components/BigBlog/BigBlog";
+import { AuthProvider } from "@/context/AuthContext";
+import { useParams, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      
-    </main>
+    <AuthProvider>
+      <main className={styles.main}>
+        {/* <LoginModal /> */}
+      </main>
+    </AuthProvider>
   );
 }

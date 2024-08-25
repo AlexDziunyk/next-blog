@@ -1,0 +1,16 @@
+.signup__modal {
+  .signup {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .login-input__wrapper {
+    border-radius: 8px;
+  }
+
+  .login-input {
+    padding: 10px;
+    font-size: 20px;
+  }
+}

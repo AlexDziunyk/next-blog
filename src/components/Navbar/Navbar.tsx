@@ -1,7 +1,14 @@
+"use client";
+
+import { navigate } from "@/utils/navigatorActions";
 import Button, { buttonTypes } from "../Button/Button";
 import "./style.scss";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 const Navbar = () => {
+  const path = usePathname();
+
   return (
     <nav className="navbar__wrapper">
       <div className="container navbar">
@@ -12,8 +19,12 @@ const Navbar = () => {
           <li></li>
         </ul>
         <div className="navbar__buttons">
-          <Button text={"Login"} />
-          <Button text={"Sing Up"} buttonType={buttonTypes.INVERT} />
+          <Link href={"/login"}>
+            <Button>Login</Button>
+          </Link>
+          <Link href={"/signup"}>
+            <Button buttonType={buttonTypes.INVERT}>Sign Up</Button>
+          </Link>
         </div>
       </div>
     </nav>

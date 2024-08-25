@@ -1,0 +1,39 @@
+.login-modal__wrapper {
+  z-index: 100;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .login-modal__container {
+    max-width: 440px;
+    width: 100%;
+
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 30px;
+
+    .login {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+  }
+
+
+  .login-input__wrapper {
+    border-radius: 8px;
+  } 
+
+  .login-input {
+    padding: 10px;
+    font-size: 20px;
+  }
+
+}

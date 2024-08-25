@@ -1,0 +1,28 @@
+.signup__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+
+  .signup__page {
+    max-width: 450px;
+    width: 100%;
+    padding: 30px;
+
+    .signup__form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .login-input__wrapper {
+      border-radius: 8px;
+    }
+
+    .login-input {
+      padding: 10px;
+      font-size: 20px;
+    }
+  }
+}
