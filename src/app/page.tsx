@@ -1,3 +1,4 @@
+import BigBlog from "@/components/BigBlog/BigBlog";
 import Blogs from "@/components/Blogs/Blogs";
 import { AuthProvider } from "@/context/AuthContext";
 

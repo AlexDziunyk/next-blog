@@ -1,6 +1,7 @@
 import Image from "next/image";
 import "./style.scss";
 import CategoryTag, { categoryTagTypes } from "../CategoryTag/CategoryTag";
+import { formaDateDistance } from "@/utils/dates";
 
 interface IBigBlogProps {
   image: string;
@@ -32,23 +33,23 @@ const BigBlog = ({
           />
         </div>
         <div className="info">
-          {tags &&
+          {/* {tags &&
             tags.map((item) => (
               <CategoryTag
                 text={item}
                 categoryTagType={categoryTagTypes.INVERT}
               />
-            ))}
+            ))} */}
           <h2>{title}</h2>
           <div className="author">
-            <Image
+            {/* <Image
               src={avatar}
               alt={"avatar"}
               width={32}
               height={32}
-            />
+            /> */}
             <span className="username">{username}</span>
-            <span className="date">{date}</span>
+            <span className="date">{formaDateDistance(date)}</span>
           </div>
         </div>
       </div>

@@ -3,6 +3,8 @@ import { getBlogs } from "@/utils/supabase/api";
 import { useQuery } from "@tanstack/react-query";
 import React, { useCallback, useEffect } from "react";
 import BlogItem from "../BlogItem/BlogItem";
+import './style.scss';
+import BigBlog from "../BigBlog/BigBlog";
 
 interface IBlog {
   id: number;
@@ -33,18 +35,21 @@ const Blogs = () => {
   if (isPending) return <div>Loading</div>;
 
   return (
-    <div>
-      {blogs.map(({ id, title, cover, username, created_at, avatar, tags }: IBlog) => (
-        <BlogItem
-          key={id}
-          title={title}
-          image={cover}
-          username={username}
-          date={created_at.toString()}
-          avatar={""}
-          tags={[]}
-        />
-      ))}
+    <div className="container blogs__wrapper">
+      {blogs && blogs.length > 0 && <BigBlog image={blogs[0].cover} tags={[]} title={blogs[0].title} avatar={""} username={"Alex"} date={blogs[0].created_at.toString()} />}
+      <div className="blogs">
+        {blogs && blogs.map(({ id, title, cover, username, created_at, avatar, tags }: IBlog, index: number) => index !== 0 && (
+          <BlogItem
+            key={id}
+            title={title}
+            image={cover}
+            username={username}
+            date={created_at.toString()}
+            avatar={""}
+            tags={[]}
+          />
+        ))}
+      </div>
     </div>
   );
 };

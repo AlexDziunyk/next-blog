@@ -1,3 +1,4 @@
+import { formaDateDistance } from "@/utils/dates";
 import CategoryTag from "../CategoryTag/CategoryTag";
 import "./style.scss";
 import Image from "next/image";
@@ -37,7 +38,7 @@ const BlogItem = ({
             />
           </div>
           <p className="username">{username}</p>
-          <p className="date">{date}</p>
+          <p className="date">{formaDateDistance(date)}</p>
         </div>
       </div>
     </div>
